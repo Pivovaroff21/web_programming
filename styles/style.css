@@ -1,0 +1,76 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.2em;
+  color: #000;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 44px auto 0px auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.serch_input {
+  width: 690px;
+  max-height: 40px;
+  padding: 9px 0px;
+  margin: 0px 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  font-size: 16px;
+  line-height: 20px;
+  background: url(../img/home.svg) no-repeat left 11px top 9px;
+  padding-left: 32px;
+}
+
+.but {
+  border-radius: 2px;
+  padding: 8px 16px 8px 36px;
+  height: 40px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.login_but {
+  max-width: 96px;
+  margin-right: 5px;
+  border: 1px solid #1890ff;
+  color: #fff;
+  background: #1890ff url(../img/user.svg) no-repeat left 16px center;
+}
+
+.login_but:hover {
+  background: #0f5ca4 url(../img/user.svg) no-repeat left 16px center;
+}
+
+.cart_but {
+  border-radius: 2px;
+  padding: 8px 16px 8px 36px;
+  max-width: 113px;
+  background: #fff url(../img/cart.svg) no-repeat left 16px center;
+  border: 1px solid #d9d9d9;
+  color: #595959;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.0015);
+}
+
+.cart_but:hover {
+  background: rgb(215, 208, 208) url(../img/cart.svg) no-repeat left 16px center;
+}
