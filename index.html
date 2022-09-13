@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="styles/reset.css" />
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
     <title>Home</title>
@@ -11,8 +17,8 @@
   <body>
     <div class="wrapper">
       <header>
-        <a href="index.html" class="logo_link"
-          ><img src="img/logo.png" alt="logo" class="logo_pic"
+        <a href="index.html" class=""
+          ><img src="img/logo.svg" alt="logo" class="logo_pic"
         /></a>
 
         <input
@@ -26,6 +32,147 @@
           <button class="but cart_but">Корзина</button>
         </div>
       </header>
+
+      <section class="ad">
+        <div class="ad_text">
+          <h1 class="ad_title">Онлайн-сервис доставки еды на дом</h1>
+          <p class="ad_subtitle">
+            Блюда из любимого ресторана привезет курьер в перчатках, маске и с
+            антисептиком
+          </p>
+        </div>
+      </section>
+
+      <section class="rest_cards">
+        <div class="rest_heading">
+          <h2 class="rest_title">Рестораны</h2>
+          <input
+            class="rest_search"
+            type="text"
+            name="search"
+            placeholder="Поиск блюд и рестаранов"
+          />
+        </div>
+        <!-- restaurant cards -->
+        <div class="r_cards">
+          <div class="r_card">
+            <img src="./img/card-img-1.png" alt="pizza" />
+            <div class="card_caption">
+              <div class="child_cap top_cap">
+                <p class="card_name">Пицца плюс</p>
+                <p class="card_time">50 мин</p>
+              </div>
+              <div class="child_cap bottom_cap">
+                <p class="card_rating">4.5</p>
+                <p class="pr_cat card_price">От 900 ₴</p>
+                <p class="pr_cat card_category">Пицца</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="r_card">
+            <img src="./img/card-img-2.png" alt="pizza" />
+            <div class="card_caption">
+              <div class="child_cap top_cap">
+                <p class="card_name">Тануки </p>
+                <p class="card_time">50 мин</p>
+              </div>
+              <div class="child_cap bottom_cap">
+                <p class="card_rating">4.5</p>
+                <p class="pr_cat card_price">От 900 ₴</p>
+                <p class="pr_cat card_category">Пицца</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="r_card">
+            <img src="./img/card-img-3.png" alt="pizza" />
+            <div class="card_caption">
+              <div class="child_cap top_cap">
+                <p class="card_name">FoodBand</p>
+                <p class="card_time">50 мин</p>
+              </div>
+              <div class="child_cap bottom_cap">
+                <p class="card_rating">4.5</p>
+                <p class="pr_cat card_price">От 900 ₴</p>
+                <p class="pr_cat card_category">Пицца</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="r_card">
+            <img src="./img/card-img-4.png" alt="pizza" />
+            <div class="card_caption">
+              <div class="child_cap top_cap">
+                <p class="card_name">Жадина-пицца</p>
+                <p class="card_time">50 мин</p>
+              </div>
+              <div class="child_cap bottom_cap">
+                <p class="card_rating">4.5</p>
+                <p class="pr_cat card_price">От 900 ₴</p>
+                <p class="pr_cat card_category">Пицца</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="r_card">
+            <img src="./img/card-img-5.png" alt="pizza" />
+            <div class="card_caption">
+              <div class="child_cap top_cap">
+                <p class="card_name">Точка еды</p>
+                <p class="card_time">50 мин</p>
+              </div>
+              <div class="child_cap bottom_cap">
+                <p class="card_rating">4.5</p>
+                <p class="pr_cat card_price">От 900 ₴</p>
+                <p class="pr_cat card_category">Пицца</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="r_card">
+            <img src="./img/card-img-6.png" alt="pizza" />
+            <div class="card_caption">
+              <div class="child_cap top_cap">
+                <p class="card_name">PizzaBurger</p>
+                <p class="card_time">50 мин</p>
+              </div>
+              <div class="child_cap bottom_cap">
+                <p class="card_rating">4.5</p>
+                <p class="pr_cat card_price">От 900 ₴</p>
+                <p class="pr_cat card_category">Пицца</p>
+              </div>
+            </div>
+          </div>
+          <!-- end cards -->
+      </section>
     </div>
+      <footer>
+        <div class="footer_wrap">
+          <a href="index.html" class="logo_link"
+            ><img src="img/logo.svg" alt="logo" class="logo_pic"
+          /></a>
+        <nav>
+            <ul class="footer_info">
+              <li ><a href="!#" class="info_link"> Ресторанам</a> </li>
+              <li ><a href="!#" class="info_link"> Курьерам</a> </li>
+              <li ><a href="!#" class="info_link">Пресс-центр </a></li>
+              <li ><a href="!#"class="info_link"> Контакты</a> </li>
+            </ul>
+          </nav>
+        <div class="medias">
+          <a href="!#" class="media_link"
+            ><img src="img/media-pic-1.svg" alt="logo" class="logo_pic"
+          /></a>
+          <a href="!#" class="media_link"
+            ><img src="img/media-pic-2.svg" alt="logo" class="logo_pic"
+          /></a>
+          <a href="!#" class="media_link"
+            ><img src="img/media-3.svg" alt="logo" class="logo_pic"
+          /></a>
+        </div>
+      </div>
+      </footer>
+
   </body>
 </html>
