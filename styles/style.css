@@ -35,7 +35,7 @@ header {
 }
 
 .serch_input {
-  width: 690px;
+  flex: 0.8;
   max-height: 40px;
   padding: 9px 0px;
   margin: 0px 10px;
@@ -84,24 +84,14 @@ header {
 
 /*header media*/
 
-@media screen and (max-width: 1094px) {
-  .serch_input {
-    width: 390px;
-  }
-}
-@media screen and (max-width: 794px) {
-  .serch_input {
-    width: 190px;
-  }
-}
-@media screen and (max-width: 594px) {
+@media screen and (max-width: 600px) {
   header {
     display: block;
     max-width: 360px;
     margin: 0 auto;
   }
   .serch_input {
-    width: 220px;
+    width: 200px;
     display: inline-block;
     margin: 0px;
   }
@@ -172,7 +162,8 @@ header {
   justify-content: space-between;
 }
 .r_card {
-  max-width: 384px;
+  /* max-width: 384px; */
+  flex-basis: 31%;
   background: #ffffff;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   border-radius: 7px;
@@ -228,6 +219,10 @@ header {
   color: #8c8c8c;
 }
 .card_category {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 150px;
   padding-left: 25px;
   background: url(../img/card_category-dot-pic.png) no-repeat left 10px center;
 }
@@ -276,4 +271,172 @@ nav {
 
 .media_link:last-child {
   margin-right: 0px;
+}
+
+/* media start*/
+
+/* ad media */
+
+@media screen and (max-width: 1294px) {
+  .ad {
+    background: #fff1b8 url(../img/ad-pic.png) no-repeat top -20px right -100px/60%;
+  }
+  .ad_text {
+    max-width: 45%;
+  }
+  .ad_title {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  .ad_subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .ad_text {
+    padding: 38px 0px 38px 40px;
+  }
+  .ad_title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .ad_subtitle {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .ad_text {
+    padding: 28px 0px 28px 30px;
+  }
+  .ad_title {
+    font-size: 25px;
+    line-height: 28px;
+  }
+
+  .ad_subtitle {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+@media screen and (max-width: 594px) {
+  .ad {
+    margin-top: 20px;
+    background: #fff1b8 url(../img/ad-pic.png) no-repeat top -10px right -50px/60%;
+  }
+  .ad_text {
+    padding: 18px 0px 18px 20px;
+  }
+  .ad_title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .ad_subtitle {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+/* ad media end*/
+
+/* cards media start*/
+
+@media screen and (max-width: 910px) {
+  .r_card {
+    flex-basis: 43%;
+  }
+}
+@media screen and (max-width: 664px) {
+  .card_caption {
+    padding: 16px 19px 25px 19px;
+  }
+
+  .top_cap {
+    margin-bottom: 8px;
+  }
+
+  .card_name {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .card_rating {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .pr_cat {
+    font-size: 16px;
+    line-height: 28px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .rest_title {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .rest_search {
+    margin: 0 auto;
+    padding-left: 34px;
+  }
+  .rest_heading {
+    max-width: 360px;
+    margin: 0 auto 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .r_cards {
+    display: block;
+  }
+  .r_card {
+    max-width: 360px;
+    margin: 0 auto 20px auto;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  .r_card {
+    flex-basis: 100%;
+    margin: 0 auto 20px auto;
+  }
+}
+
+/*card media end*/
+
+/* footer media start*/
+
+@media screen and (max-width: 735px) {
+  .footer_info {
+    flex-direction: column;
+    margin: 0px 15px;
+    padding: 0px;
+  }
+  .footer_li {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .media_link {
+    margin-right: 10px;
+  }
+}
+@media screen and (max-width: 427px) {
+  .footer_wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+  .logo_link {
+    margin: 0px 0px 20px 0px;
+  }
+  .footer_info {
+    flex-direction: column;
+    margin: 20px 15px;
+    padding: 0px;
+  }
 }
