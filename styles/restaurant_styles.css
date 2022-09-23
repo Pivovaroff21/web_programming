@@ -253,6 +253,149 @@ nav {
 }
 /*footer styles end*/
 
+/* modal styles start*/
+.modal {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.is_open {
+  display: flex;
+}
+
+.modal_dialog {
+  padding: 41px 46px;
+  width: 95%;
+  width: 780px;
+  box-sizing: border-box;
+  min-height: 552px;
+  background: #ffffff;
+  border-radius: 5px;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 46px;
+}
+
+.modal_title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #000000;
+}
+
+.modal_close {
+  background: none;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+.modal_products {
+  margin-bottom: 53px;
+}
+
+.modal_product {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.modal_product_name {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #000000;
+  flex: 2;
+}
+
+.modal_product_price {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #000000;
+  margin-right: 48px;
+}
+
+.modal_product_quntity_wrap {
+  display: flex;
+  justify-content: space-between;
+  max-width: 113px;
+}
+.modal_product_quantity {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 4px 13px;
+  max-width: 35px;
+  text-align: center;
+  color: #000000;
+}
+
+.modal_but {
+  width: 39px;
+  height: 32px;
+  padding: 5px 15px;
+  background: #ffffff;
+  color: #40a9ff;
+  border: 1px solid #40a9ff;
+  border-radius: 2px;
+}
+
+.modal_footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal_total {
+  text-align: center;
+  padding: 15px 20px;
+  width: 66px;
+  background: #262626;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  color: #fafafa;
+}
+
+.footer_but {
+  padding: 6px 16px;
+  height: 40px;
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.order_but {
+  max-width: 149px;
+  background: #1890ff;
+  color: #ffffff;
+  border: 1px solid #1890ff;
+  margin-right: 19px;
+}
+
+.cancel_but {
+  max-width: 88px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  color: #595959;
+}
+
 /*media starts*/
 /* cards media start*/
 

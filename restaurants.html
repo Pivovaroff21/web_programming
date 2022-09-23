@@ -11,11 +11,17 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" type="text/css" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/animate.css" />
     <link
       rel="stylesheet"
       type="text/css"
       href="styles/restaurant_styles.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css"
+    />
+
     <title>Home</title>
   </head>
   <body>
@@ -33,7 +39,7 @@
         />
         <div class="buttons">
           <button class="but login_but">Войти</button>
-          <button class="but cart_but">Корзина</button>
+          <button class="but cart_but" id="basket_button">Корзина</button>
         </div>
       </header>
       <section class="food">
@@ -50,7 +56,7 @@
         </div>
 
         <div class="food_cards">
-          <div class="food_card">
+          <div class="food_card wow fadeInUp" data-wow-delay="0.2s">
             <img
               src="./img/food_card-pic-1.png"
               alt="food"
@@ -65,7 +71,7 @@
               <span class="food_card_price">250 ₴</span>
             </div>
           </div>
-          <div class="food_card">
+          <div class="food_card wow fadeInUp" data-wow-delay="0.4s">
             <img
               src="./img/food_card-pic-2.png"
               alt="food"
@@ -81,7 +87,7 @@
               <span class="food_card_price">395 ₴</span>
             </div>
           </div>
-          <div class="food_card">
+          <div class="food_card wow fadeInUp" data-wow-delay="0.6s">
             <img
               src="./img/food_card-pic-3.png"
               alt="food"
@@ -96,7 +102,7 @@
               <span class="food_card_price">250 ₴</span>
             </div>
           </div>
-          <div class="food_card">
+          <div class="food_card wow fadeInUp" data-wow-delay="0.2s">
             <img
               src="./img/food_card-pic-4.png"
               alt="food"
@@ -112,7 +118,7 @@
               <span class="food_card_price">250 ₴</span>
             </div>
           </div>
-          <div class="food_card">
+          <div class="food_card wow fadeInUp" data-wow-delay="0.4s">
             <img
               src="./img/food_card-pic-5.png"
               alt="food"
@@ -127,7 +133,7 @@
               <span class="food_card_price">250 ₴</span>
             </div>
           </div>
-          <div class="food_card">
+          <div class="food_card wow fadeInUp" data-wow-delay="0.6s">
             <img
               src="./img/food_card-pic-6.png"
               alt="food"
@@ -179,5 +185,70 @@
         </div>
       </div>
     </footer>
+
+    <div class="modal animated fadeInRight delay-0.5s">
+      <div class="modal_dialog">
+        <div class="modal_header">
+          <h3 class="modal_title">Корзина</h3>
+          <button class="modal_close" id="close_button">X</button>
+        </div>
+        <div class="modal_products">
+          <div class="modal_product">
+            <p class="modal_product_name">Ролл угорь стандарт</p>
+            <p class="modal_product_price">250₴</p>
+            <div class="modal_product_quntity_wrap">
+              <button class="modal_but reduce_quantity">-</button>
+              <div class="modal_product_quantity">1</div>
+              <button class="modal_but increase_quantity">+</button>
+            </div>
+          </div>
+          <div class="modal_product">
+            <p class="modal_product_name">Ролл угорь стандарт</p>
+            <p class="modal_product_price">250₴</p>
+            <div class="modal_product_quntity_wrap">
+              <button class="modal_but reduce_quantity">-</button>
+              <div class="modal_product_quantity">1</div>
+              <button class="modal_but increase_quantity">+</button>
+            </div>
+          </div>
+          <div class="modal_product">
+            <p class="modal_product_name">Ролл угорь стандарт</p>
+            <p class="modal_product_price">250₴</p>
+            <div class="modal_product_quntity_wrap">
+              <button class="modal_but reduce_quantity">-</button>
+              <div class="modal_product_quantity">1</div>
+              <button class="modal_but increase_quantity">+</button>
+            </div>
+          </div>
+          <div class="modal_product">
+            <p class="modal_product_name">Ролл угорь стандарт</p>
+            <p class="modal_product_price">250₴</p>
+            <div class="modal_product_quntity_wrap">
+              <button class="modal_but reduce_quantity">-</button>
+              <div class="modal_product_quantity">1</div>
+              <button class="modal_but increase_quantity">+</button>
+            </div>
+          </div>
+          <div class="modal_product">
+            <p class="modal_product_name">Ролл угорь стандарт</p>
+            <p class="modal_product_price">250₴</p>
+            <div class="modal_product_quntity_wrap">
+              <button class="modal_but reduce_quantity">-</button>
+              <div class="modal_product_quantity">1</div>
+              <button class="modal_but increase_quantity">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal_footer">
+          <p class="modal_total">1250₴</p>
+          <div class="buttons">
+            <button class="footer_but order_but">Оформить заказ</button>
+            <button class="footer_but cancel_but">Отмена</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/wow.min.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
