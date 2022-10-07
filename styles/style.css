@@ -47,6 +47,10 @@ header {
   padding-left: 32px;
 }
 
+.buttons {
+  display: flex;
+}
+
 .but {
   border-radius: 2px;
   padding: 8px 16px 8px 36px;
@@ -55,8 +59,20 @@ header {
   font-size: 16px;
   line-height: 24px;
 }
+.logout_but {
+  display: none;
+}
+.user_name {
+  display: none;
+  margin-right: 30px;
+  max-height: 40px;
+  padding: 9px 0px;
+  font-size: 16px;
+  line-height: 20px;
+}
 
-.login_but {
+.login_but,
+.logout_but {
   max-width: 96px;
   margin-right: 5px;
   border: 1px solid #1890ff;
@@ -64,7 +80,8 @@ header {
   background: #1890ff url(../img/user.svg) no-repeat left 16px center;
 }
 
-.login_but:hover {
+.login_but:hover,
+.logout_but:hover {
   background: #0f5ca4 url(../img/user.svg) no-repeat left 16px center;
 }
 
@@ -271,6 +288,90 @@ nav {
 
 .media_link:last-child {
   margin-right: 0px;
+}
+/* modal styles start*/
+.modal {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.is_open {
+  display: flex;
+}
+
+.modal_dialog {
+  padding: 41px 46px;
+  width: 95%;
+  width: 400px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 46px;
+}
+
+.modal_title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #000000;
+}
+
+.modal_close {
+  background: none;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+.txt_field {
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+.login_input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.error {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.enter_but {
+  border: 1px solid #1890ff;
+  background-color: #1890ff;
+  color: #fff;
+  border-radius: 2px;
+  padding: 10px 50px 10px 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+.enter_but:hover {
+  color: #fff;
+  background: #0f5ca4;
+  transition: 0.25s;
 }
 
 /* media start*/
