@@ -348,6 +348,10 @@ nav {
   outline: none;
 }
 
+.hide{
+  display: none;
+}
+
 .red_border {
   border-bottom: 2px solid red;
 }
