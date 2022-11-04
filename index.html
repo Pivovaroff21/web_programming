@@ -12,7 +12,15 @@
     />
     <link rel="stylesheet" type="text/css" href="styles/reset.css" />
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="styles/restaurant_styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="styles/restaurant_styles.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css"
@@ -22,8 +30,7 @@
   <body>
     <div class="wrapper">
       <header>
-        
-          <img src="img/logo.svg" alt="logo" class="logo_pic"/>
+        <img src="img/logo.svg" alt="logo" class="logo_pic" />
 
         <input
           class="serch_input"
@@ -33,20 +40,50 @@
         />
         <div class="buttons">
           <span class="user_name"></span>
-          <button class="but login_but" >Войти</button>
-          <button class="but logout_but" >Выйти</button>
+          <button class="but login_but">Войти</button>
+          <button class="but logout_but">Выйти</button>
         </div>
       </header>
 
-      <section class="ad">
-        <div class="ad_text">
-          <h1 class="ad_title">Онлайн-сервис доставки еды на дом</h1>
-          <p class="ad_subtitle">
-            Блюда из любимого ресторана привезет курьер в перчатках, маске и с
-            антисептиком
-          </p>
+      <section class="swiper">
+        <div class="swiper-wrapper">
+          <div class="ad pizza swiper-slide">
+            <div class="ad_text">
+              <h2 class="ad_title">Онлайн-сервис доставки еды на дом</h1>
+              <p class="ad_subtitle">
+                Блюда из любимого ресторана привезет курьер в перчатках, маске и с
+                антисептиком
+              </p>
+            </div>
+          </div>
+          <div class="ad kebab swiper-slide">
+            <div class="ad_text">
+              <h2 class="ad_title">Шашлыки на майские <br> со скидкой 35%</h1>
+              <p class="ad_subtitle">
+                Закажите шашлыки в любом ресторане до 10 мая и получите скидку по промокоду OMAGAD
+              </p>
+            </div>
+          </div>
+          <div class="ad vegetables swiper-slide">
+            <div class="ad_text">
+              <h2 class="ad_title">Скидка 20% на всю еду <br> по промокоду LOVE.JS</h1>
+              <p class="ad_subtitle">
+                Блюдо из ресторана привезут вместе с двумя подарочными книгами по фронтенду
+              </p>
+            </div>
+          </div>
+          <div class="ad sushi swiper-slide">
+            <div class="ad_text">
+              <h2 class="ad_title">Сеты со скидкой до 30% <br> в ресторанах</h1>
+              <p class="ad_subtitle">
+                Скидки на сеты до 30 мая по промокоду DADADA
+              </p>
+            </div>
+          </div>
         </div>
+        <div class="swiper-pagination"></div>
       </section>
+      
 
       <section class="rest_cards">
         <div class="rest_heading">
@@ -59,32 +96,30 @@
           />
         </div>
         <!-- restaurant cards -->
-        <div class="r_cards">
-         
-        </div>
-          <!-- end cards -->
+        <div class="r_cards"></div>
+        <!-- end cards -->
       </section>
-        <!-- product cards -->
-      <section class="food hide"> 
-        <div class="food_cards ">
-          
-          </div>
+      <!-- product cards -->
+      <section class="food hide">
+        <div class="food_cards"></div>
       </section>
       <!-- end cards -->
     </div>
-      <footer>
-        <div class="footer_wrap">
-          <a href="index.html" class="logo_link"
-            ><img src="img/logo.svg" alt="logo" class="logo_pic"
-          /></a>
+    <footer>
+      <div class="footer_wrap">
+        <a href="index.html" class="logo_link"
+          ><img src="img/logo.svg" alt="logo" class="logo_pic"
+        /></a>
         <nav>
-            <ul class="footer_info">
-              <li ><a href="restaurants.html" class="info_link"> Ресторанам</a> </li>
-              <li ><a href="!#" class="info_link"> Курьерам</a> </li>
-              <li ><a href="!#" class="info_link">Пресс-центр </a></li>
-              <li ><a href="!#"class="info_link"> Контакты</a> </li>
-            </ul>
-          </nav>
+          <ul class="footer_info">
+            <li>
+              <a href="restaurants.html" class="info_link"> Ресторанам</a>
+            </li>
+            <li><a href="!#" class="info_link"> Курьерам</a></li>
+            <li><a href="!#" class="info_link">Пресс-центр </a></li>
+            <li><a href="!#" class="info_link"> Контакты</a></li>
+          </ul>
+        </nav>
         <div class="medias">
           <a href="!#" class="media_link"
             ><img src="img/media-pic-1.svg" alt="logo" class="logo_pic"
@@ -97,7 +132,7 @@
           /></a>
         </div>
       </div>
-      </footer>
+    </footer>
 
     <div class="modal animated fadeInRight delay-0.5s modal_auth">
       <div class="modal_dialog">
@@ -105,7 +140,7 @@
           <h3 class="modal_title">Войти</h3>
           <button class="modal_close" id="close_button">X</button>
         </div>
-        <form  id="login_form">
+        <form id="login_form">
           <div class="txt_field">
             <input
               class="login_input"
@@ -124,12 +159,12 @@
               placeholder="Password"
             />
           </div>
-          <div class="error">* </div>
+          <div class="error">*</div>
           <input class="enter_but" type="submit" value="Войти" />
         </form>
       </div>
     </div>
     <script src="js/wow.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" type="module"></script>
   </body>
 </html>

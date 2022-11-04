@@ -121,11 +121,24 @@ header {
 
 /* ad block styles start*/
 .ad {
-  background: #fff1b8 url(../img/ad-pic.png) no-repeat top -20px right -100px/800px;
   border-radius: 10px;
   display: flex;
   margin-bottom: 56px;
 }
+.pizza {
+  background: #fff1b8 url(../img/ad-pic.png) no-repeat top -20px right -100px/800px;
+}
+
+.kebab {
+  background: #d5e3fe url(../img/ad-pic-2.png) no-repeat top -20px right -100px/800px;
+}
+.vegetables {
+  background: #fee75d url(../img/ad-pic-3.png) no-repeat top -20px right -100px/800px;
+}
+.sushi {
+  background: #fff4f0 url(../img/ad-pic-4.png) no-repeat top -20px right -100px/800px;
+}
+
 .ad_text {
   max-width: 538px;
   padding: 68px 0px 68px 70px;
@@ -348,7 +361,7 @@ nav {
   outline: none;
 }
 
-.hide{
+.hide {
   display: none;
 }
 
@@ -385,8 +398,17 @@ nav {
 /* ad media */
 
 @media screen and (max-width: 1294px) {
-  .ad {
+  .pizza {
     background: #fff1b8 url(../img/ad-pic.png) no-repeat top -20px right -100px/60%;
+  }
+  .kebab {
+    background: #d5e3fe url(../img/ad-pic-2.png) no-repeat top -20px right -100px/60%;
+  }
+  .vegetables {
+    background: #fee75d url(../img/ad-pic-3.png) no-repeat top -20px right -100px/60%;
+  }
+  .sushi {
+    background: #fff4f0 url(../img/ad-pic-4.png) no-repeat top -20px right -100px/60%;
   }
   .ad_text {
     max-width: 45%;
@@ -434,7 +456,18 @@ nav {
 @media screen and (max-width: 594px) {
   .ad {
     margin-top: 20px;
+  }
+  .pizza {
     background: #fff1b8 url(../img/ad-pic.png) no-repeat top -10px right -50px/60%;
+  }
+  .kebab {
+    background: #d5e3fe url(../img/ad-pic-2.png) no-repeat top -10px right -50px/60%;
+  }
+  .vegetables {
+    background: #fee75d url(../img/ad-pic-3.png) no-repeat top -10px right -50px/60%;
+  }
+  .sushi {
+    background: #fff4f0 url(../img/ad-pic-4.png) no-repeat top -10px right -50px/60%;
   }
   .ad_text {
     padding: 18px 0px 18px 20px;

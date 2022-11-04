@@ -1,4 +1,5 @@
-new WOW().init();
+'use strict'
+import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
 
 const modalAuth = document.querySelector(".modal_auth");
 const loginBut = document.querySelector(".login_but");
@@ -11,7 +12,7 @@ const closeBut = document.querySelector("#close_button");
 const errorMessage = document.querySelector(".error");
 const rCards = document.querySelector(".r_cards");
 const foodSection = document.querySelector(".food");
-const ad = document.querySelector(".ad");
+const swiper = document.querySelector(".swiper");
 const logo = document.querySelector(".logo_pic");
 const foodCards = document.querySelector(".food_cards");
 let login = localStorage.getItem("login");
@@ -143,12 +144,12 @@ function CreateProductCard() {
 function OpenProducts(event) {
   const restaurant = event.target.closest(".r_card");
   if (restaurant) {
-    ad.classList.add("hide");
+    swiper.classList.add("hide");
     rCards.classList.add("hide");
     foodSection.classList.remove("hide");
     foodCards.textContent='';
     logo.addEventListener("click", () => {
-      ad.classList.remove("hide");
+      swiper.classList.remove("hide");
       rCards.classList.remove("hide");
       foodSection.classList.add("hide");
     });
@@ -158,6 +159,19 @@ function OpenProducts(event) {
   }
 }
 
+new Swiper(".swiper", {
+  sliderPerView: 1,
+  loop: true,
+  autoplay: {
+    delay: 5000,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    type: "bullets",
+  },
+});
+
+new WOW().init();
 checkAuth();
 CreateRestaurantCard();
 CreateRestaurantCard();
