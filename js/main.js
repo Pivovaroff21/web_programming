@@ -15,7 +15,17 @@ const foodSection = document.querySelector(".food");
 const swiper = document.querySelector(".swiper");
 const logo = document.querySelector(".logo_pic");
 const foodCards = document.querySelector(".food_cards");
+const foodHeading = document.querySelector(".food_heading");
 let login = localStorage.getItem("login");
+
+const getData = async function(url){
+  const response = await fetch(url);
+  if(!response){
+    throw new Error(`Error at url: ${url} status 404,
+    ${response.status}!`);
+  }
+  return await response.json();
+}
 
 function toggleModalAuth() {
   modalAuth.classList.toggle("is_open");
@@ -100,19 +110,24 @@ function checkAuth() {
   }
 }
 
-function CreateRestaurantCard() {
+function CreateRestaurantCard({image, kitchen, name , price, products, stars, 
+  time_of_delivery:timeOfDelivery }) {
   const card = `
-   <div class="r_card">
-            <img src="./img/card-img-1.png" alt="pizza" />
+          <div class="r_card" data-products="${products}"
+          data-rest-name="${name}"
+          data-rest-stars="${stars}"
+          data-rest-price="${price}"
+          data-rest-kitchen="${kitchen}">
+            <img src="${image}" alt="pizza" />
             <div class="card_caption">
               <div class="child_cap top_cap">
-                <p class="card_name">Пицца плюс</p>
-                <p class="card_time">50 мин</p>
+                <p class="card_name">${name}</p>
+                <p class="card_time">${timeOfDelivery} мин</p>
               </div>
               <div class="child_cap bottom_cap">
-                <p class="card_rating">4.5</p>
-                <p class="pr_cat card_price">От 900 ₴</p>
-                <p class="pr_cat card_category">Пицца</p>
+                <p class="card_rating">${stars}</p>
+                <p class="pr_cat card_price">От ${price} ₴</p>
+                <p class="pr_cat card_category">${kitchen}</p>
               </div>
             </div>
           </div>
@@ -120,59 +135,91 @@ function CreateRestaurantCard() {
   rCards.insertAdjacentHTML("afterbegin", card);
 }
 
-function CreateProductCard() {
+function CreateProductCard({id,name,description,price,image}) {
   const card = `
    <div class="food_card wow fadeInUp" data-wow-delay="0.2s">
             <img
-              src="./img/food_card-pic-1.png"
+              src="${image}"
               alt="food"
               class="food_card_img"
             />
             <div class="food_card_caption">
-              <p class="food_card_name">Ролл угорь стандарт</p>
+              <p class="food_card_name">${name}</p>
               <p class="food_card_text">
-                Рис, угорь, соус унаги, кунжут, водоросли нори.
+                ${description}
               </p>
               <button class="food_card_button">В корзину</button>
-              <span class="food_card_price">250 ₴</span>
+              <span class="food_card_price">${price} ₴</span>
             </div>
     </div>
   `;
   foodCards.insertAdjacentHTML("afterbegin", card);
 }
 
+function CreateProductHeading({ name, stars, price,kitchen}) {
+  const heading = `
+
+          <div class="food_heading_title">
+            <h1 class="food_title">${name}</h1>
+            <span class="food_rating">${stars}</span>
+          </div>
+          <div class="food_heading_wrap">
+            <p class="food_heading_text food_price">От ${price} ₴</p>
+            <p class="food_heading_text food_category">${kitchen}</p>
+          </div>
+
+  `;
+  foodHeading.insertAdjacentHTML("afterbegin", heading);
+}
+
 function OpenProducts(event) {
   const restaurant = event.target.closest(".r_card");
   if (restaurant) {
+    console.log(restaurant.dataset.restInfo)
     swiper.classList.add("hide");
     rCards.classList.add("hide");
     foodSection.classList.remove("hide");
     foodCards.textContent='';
+    foodHeading.textContent = "";
+    const restInfo = {
+      name: restaurant.dataset.restName,
+      stars: restaurant.dataset.restStars,
+      price: restaurant.dataset.restPrice,
+      kitchen: restaurant.dataset.restKitchen,
+    };
+    getData(`./db/${restaurant.dataset.products}`).then((data) => {
+      data.forEach(CreateProductCard);
+    });
+    CreateProductHeading(restInfo);
     logo.addEventListener("click", () => {
       swiper.classList.remove("hide");
       rCards.classList.remove("hide");
       foodSection.classList.add("hide");
+      
     });
-    CreateProductCard();
-    CreateProductCard();
-    CreateProductCard();
+    
   }
 }
 
-new Swiper(".swiper", {
-  sliderPerView: 1,
-  loop: true,
-  autoplay: {
-    delay: 5000,
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    type: "bullets",
-  },
-});
+ function init(){
+   new Swiper(".swiper", {
+     sliderPerView: 1,
+     loop: true,
+     autoplay: {
+       delay: 5000,
+     },
+     pagination: {
+       el: ".swiper-pagination",
+       type: "bullets",
+     },
+   });
 
-new WOW().init();
-checkAuth();
-CreateRestaurantCard();
-CreateRestaurantCard();
-CreateRestaurantCard();
+   new WOW().init();
+   checkAuth();
+
+   getData("./db/partners.json").then((data) => {
+     data.forEach(CreateRestaurantCard);
+   });
+ };
+
+ init();
