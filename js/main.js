@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
 
 const modalAuth = document.querySelector(".modal_auth");
@@ -16,16 +16,17 @@ const swiper = document.querySelector(".swiper");
 const logo = document.querySelector(".logo_pic");
 const foodCards = document.querySelector(".food_cards");
 const foodHeading = document.querySelector(".food_heading");
+const restSearch = document.querySelector(".rest_search");
 let login = localStorage.getItem("login");
 
-const getData = async function(url){
+const getData = async function (url) {
   const response = await fetch(url);
-  if(!response){
+  if (!response) {
     throw new Error(`Error at url: ${url} status 404,
     ${response.status}!`);
   }
   return await response.json();
-}
+};
 
 function toggleModalAuth() {
   modalAuth.classList.toggle("is_open");
@@ -57,7 +58,7 @@ function authorized() {
   userName.style.display = "block";
   userName.textContent = login;
   logOutBut.addEventListener("click", logOut);
-  rCards.removeEventListener("click",toggleModalAuth);
+  rCards.removeEventListener("click", toggleModalAuth);
   rCards.addEventListener("click", OpenProducts);
 }
 
@@ -95,7 +96,7 @@ function notAuthorized() {
   modalAuth.addEventListener("click", (event) => {
     if (event.target.classList.contains("is_open")) {
       toggleModalAuth();
-    };
+    }
   });
 
   rCards.removeEventListener("click", OpenProducts);
@@ -110,8 +111,15 @@ function checkAuth() {
   }
 }
 
-function CreateRestaurantCard({image, kitchen, name , price, products, stars, 
-  time_of_delivery:timeOfDelivery }) {
+function CreateRestaurantCard({
+  image,
+  kitchen,
+  name,
+  price,
+  products,
+  stars,
+  time_of_delivery: timeOfDelivery,
+}) {
   const card = `
           <div class="r_card" data-products="${products}"
           data-rest-name="${name}"
@@ -135,7 +143,7 @@ function CreateRestaurantCard({image, kitchen, name , price, products, stars,
   rCards.insertAdjacentHTML("afterbegin", card);
 }
 
-function CreateProductCard({id,name,description,price,image}) {
+function CreateProductCard({ id, name, description, price, image }) {
   const card = `
    <div class="food_card wow fadeInUp" data-wow-delay="0.2s">
             <img
@@ -156,7 +164,7 @@ function CreateProductCard({id,name,description,price,image}) {
   foodCards.insertAdjacentHTML("afterbegin", card);
 }
 
-function CreateProductHeading({ name, stars, price,kitchen}) {
+function CreateProductHeading({ name, stars, price, kitchen }) {
   const heading = `
 
           <div class="food_heading_title">
@@ -175,11 +183,10 @@ function CreateProductHeading({ name, stars, price,kitchen}) {
 function OpenProducts(event) {
   const restaurant = event.target.closest(".r_card");
   if (restaurant) {
-    console.log(restaurant.dataset.restInfo)
     swiper.classList.add("hide");
     rCards.classList.add("hide");
     foodSection.classList.remove("hide");
-    foodCards.textContent='';
+    foodCards.textContent = "";
     foodHeading.textContent = "";
     const restInfo = {
       name: restaurant.dataset.restName,
@@ -195,31 +202,77 @@ function OpenProducts(event) {
       swiper.classList.remove("hide");
       rCards.classList.remove("hide");
       foodSection.classList.add("hide");
-      
     });
-    
   }
 }
 
- function init(){
-   new Swiper(".swiper", {
-     sliderPerView: 1,
-     loop: true,
-     autoplay: {
-       delay: 5000,
-     },
-     pagination: {
-       el: ".swiper-pagination",
-       type: "bullets",
-     },
-   });
+function init() {
+  new Swiper(".swiper", {
+    sliderPerView: 1,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      type: "bullets",
+    },
+  });
 
-   new WOW().init();
-   checkAuth();
+  new WOW().init();
+  checkAuth();
 
-   getData("./db/partners.json").then((data) => {
-     data.forEach(CreateRestaurantCard);
-   });
- };
+  getData("./db/partners.json").then((data) => {
+    data.forEach(CreateRestaurantCard);
+  });
 
- init();
+  restSearch.addEventListener("keypress", function (event) {
+    if (event.charCode === 13) {
+      const value= event.target.value.trim();
+      if(!value){
+        event.target.style.backgroundColor= "red";
+        event.target.value ='';
+        setTimeout(function(){
+          event.target.style.backgroundColor = '';
+        },1000);
+        return;
+      }
+      getData("./db/partners.json")
+        .then(function (data) {
+          return data.map(function (partner) {
+            return partner.products;
+          });
+        })
+        .then(function (linksProduct) {
+          foodCards.textContent = "";
+
+          linksProduct.forEach(function (link) {
+            getData(`./db/${link}`)
+            .then(function (data) {
+              const resultSearch = data.filter(function (item) {
+                const name = item.name.toLowerCase();
+                return name.includes(value.toLowerCase());
+              });
+                swiper.classList.add("hide");
+                rCards.classList.add("hide");
+                foodSection.classList.remove("hide");
+                foodHeading.textContent = "";
+                resultSearch.forEach(CreateProductCard);
+                logo.addEventListener("click", () => {
+                  swiper.classList.remove("hide");
+                  rCards.classList.remove("hide");
+                  foodSection.classList.add("hide");
+                  event.target.value = "";
+                });
+            });
+          });
+           
+      });
+    }
+  });
+
+ 
+  
+}
+
+init();
