@@ -8,7 +8,8 @@ const logInInput = document.querySelector("#user_name");
 const passwordInput = document.querySelector("#password");
 const logOutBut = document.querySelector(".logout_but");
 const userName = document.querySelector(".user_name");
-const closeBut = document.querySelector("#close_button");
+const closeBut = document.querySelector(".modal_close");
+const closeButCart = document.querySelector(".modal_close_cart");
 const errorMessage = document.querySelector(".error");
 const rCards = document.querySelector(".r_cards");
 const foodSection = document.querySelector(".food");
@@ -17,7 +18,14 @@ const logo = document.querySelector(".logo_pic");
 const foodCards = document.querySelector(".food_cards");
 const foodHeading = document.querySelector(".food_heading");
 const restSearch = document.querySelector(".rest_search");
+const cartBut = document.querySelector(".cart_but");
+const modalCart = document.querySelector(".modal_cart");
+const cancelButCart = document.querySelector(".cancel_but");
+const modalProducts = document.querySelector(".modal_products");
+const modalTotal = document.querySelector(".modal_total");
 let login = localStorage.getItem("login");
+
+const cart = [];
 
 const getData = async function (url) {
   const response = await fetch(url);
@@ -41,6 +49,24 @@ function toggleModalAuth() {
   }
 }
 
+function toggleModalCart() {
+  modalCart.classList.toggle("is_open");
+  if (modalCart.classList.contains("is_open")) {
+    closeButCart.addEventListener("click", toggleModalCart);
+   
+    document.body.style.cssText = `
+      position: relative;
+      overflow: hidden;
+      height:100vh;
+      `;
+  } else {
+    document.body.style.cssText = ``;
+    closeButCart.removeEventListener("click", toggleModalCart);
+    
+
+  }
+}
+
 function authorized() {
   console.log("Authorized");
 
@@ -48,6 +74,7 @@ function authorized() {
     login = null;
     localStorage.removeItem("login");
     loginBut.style.display = "";
+    cartBut.style.display = "";
     logOutBut.style.display = "";
     userName.style.display = "";
     logOutBut.removeEventListener("click", logOut);
@@ -55,6 +82,7 @@ function authorized() {
   }
   loginBut.style.display = "none";
   logOutBut.style.display = "flex";
+  cartBut.style.display = "flex";
   userName.style.display = "block";
   userName.textContent = login;
   logOutBut.addEventListener("click", logOut);
@@ -156,7 +184,7 @@ function CreateProductCard({ id, name, description, price, image }) {
               <p class="food_card_text">
                 ${description}
               </p>
-              <button class="food_card_button">В корзину</button>
+              <button class="food_card_button add_to_cart" id ="${id}">В корзину</button>
               <span class="food_card_price">${price} ₴</span>
             </div>
     </div>
@@ -206,6 +234,70 @@ function OpenProducts(event) {
   }
 }
 
+function addToCart(e) {
+  const buttonAddToCart = e.target.closest(".add_to_cart");
+  if (buttonAddToCart) {
+    const card = buttonAddToCart.closest(".food_card");
+    const title = card.querySelector(".food_card_name").textContent;
+    const cost = card.querySelector(".food_card_price").textContent;
+    const id = buttonAddToCart.id;
+    const food = cart.find((x) => x.id === id);
+    if (food) {
+      food.count += 1;
+    } else {
+      cart.push({
+        title,
+        cost,
+        id,
+        count: 1,
+      });
+    }
+    localStorage.setItem("cart",JSON.stringify(cart));
+  }
+}
+
+function renderCart(){
+  const localCart = JSON.parse(localStorage.getItem("cart"));
+  modalProducts.textContent ='';
+  modalTotal.textContent ='';
+  localCart.forEach(function(item){
+    const product = `
+         <div class="modal_product">
+            <p class="modal_product_name">${item.title}</p>
+            <p class="modal_product_price">${item.cost}</p>
+            <div class="modal_product_quntity_wrap">
+              <button class="modal_but counter_but reduce_quantity"  data-id = "${item.id}">-</button>
+              <div class="modal_product_quantity">${item.count}</div>
+              <button class="modal_but counter_but increase_quantity" data-id = "${item.id}">+</button>
+            </div>
+          </div>`;
+    modalProducts.insertAdjacentHTML("afterbegin", product);
+  })
+  const totalPrice =localCart.reduce(function(result,item){
+    return result+(parseFloat(item.cost))*item.count;
+  },0)
+  modalTotal.textContent = `${totalPrice}₴`;
+  
+ 
+}
+
+function changeCount(event){
+  const target = event.target;
+   const localCart = JSON.parse(localStorage.getItem("cart"));
+  if (target.classList.contains("counter_but")){
+    const food = localCart.find(function (item) {
+      return item.id === target.dataset.id;
+    });
+    if (target.classList.contains("reduce_quantity")) if(food.count > 0 ) food.count--;
+    if (food.count === 0){
+      localCart.splice(localCart.indexOf(food), 1);
+    }
+    if (target.classList.contains("increase_quantity")) food.count++;
+    localStorage.setItem("cart", JSON.stringify(localCart));
+    renderCart();
+  }
+
+}
 function init() {
   new Swiper(".swiper", {
     sliderPerView: 1,
@@ -228,13 +320,13 @@ function init() {
 
   restSearch.addEventListener("keypress", function (event) {
     if (event.charCode === 13) {
-      const value= event.target.value.trim();
-      if(!value){
-        event.target.style.backgroundColor= "red";
-        event.target.value ='';
-        setTimeout(function(){
-          event.target.style.backgroundColor = '';
-        },1000);
+      const value = event.target.value.trim();
+      if (!value) {
+        event.target.style.backgroundColor = "red";
+        event.target.value = "";
+        setTimeout(function () {
+          event.target.style.backgroundColor = "";
+        }, 1000);
         return;
       }
       getData("./db/partners.json")
@@ -247,32 +339,47 @@ function init() {
           foodCards.textContent = "";
 
           linksProduct.forEach(function (link) {
-            getData(`./db/${link}`)
-            .then(function (data) {
+            getData(`./db/${link}`).then(function (data) {
               const resultSearch = data.filter(function (item) {
                 const name = item.name.toLowerCase();
                 return name.includes(value.toLowerCase());
               });
-                swiper.classList.add("hide");
-                rCards.classList.add("hide");
-                foodSection.classList.remove("hide");
-                foodHeading.textContent = "";
-                resultSearch.forEach(CreateProductCard);
-                logo.addEventListener("click", () => {
-                  swiper.classList.remove("hide");
-                  rCards.classList.remove("hide");
-                  foodSection.classList.add("hide");
-                  event.target.value = "";
-                });
+              swiper.classList.add("hide");
+              rCards.classList.add("hide");
+              foodSection.classList.remove("hide");
+              foodHeading.textContent = "";
+              resultSearch.forEach(CreateProductCard);
+              logo.addEventListener("click", () => {
+                swiper.classList.remove("hide");
+                rCards.classList.remove("hide");
+                foodSection.classList.add("hide");
+                event.target.value = "";
+              });
             });
           });
-           
-      });
+        });
     }
   });
-
- 
   
+  cartBut.addEventListener("click", () => {
+     
+      if(localStorage.getItem("cart")){
+         renderCart();
+         toggleModalCart();
+      }else{
+        alert("Корзина пуста")
+      }
+      
+    });
+    
+  cancelButCart.addEventListener("click", ()=>{
+    cart.length = 0;
+    localStorage.removeItem("cart");
+    toggleModalCart();
+
+  });
+  modalCart.addEventListener("click", changeCount);
+  foodSection.addEventListener("click", addToCart);
 }
 
 init();
