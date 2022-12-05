@@ -23,6 +23,7 @@ const modalCart = document.querySelector(".modal_cart");
 const cancelButCart = document.querySelector(".cancel_but");
 const modalProducts = document.querySelector(".modal_products");
 const modalTotal = document.querySelector(".modal_total");
+const orderBut = document.querySelector(".order_but");
 let login = localStorage.getItem("login");
 
 const cart = [];
@@ -36,6 +37,10 @@ const getData = async function (url) {
   return await response.json();
 };
 
+
+
+
+  
 function toggleModalAuth() {
   modalAuth.classList.toggle("is_open");
   if (modalAuth.classList.contains("is_open")) {
@@ -149,7 +154,7 @@ function CreateRestaurantCard({
   time_of_delivery: timeOfDelivery,
 }) {
   const card = `
-          <div class="r_card" data-products="${products}"
+          <div class="r_card" data-products='${JSON.stringify(products)}'
           data-rest-name="${name}"
           data-rest-stars="${stars}"
           data-rest-price="${price}"
@@ -222,9 +227,12 @@ function OpenProducts(event) {
       price: restaurant.dataset.restPrice,
       kitchen: restaurant.dataset.restKitchen,
     };
-    getData(`./db/${restaurant.dataset.products}`).then((data) => {
-      data.forEach(CreateProductCard);
-    });
+    const products = JSON.parse(restaurant.dataset.products);
+    products.forEach(product=>CreateProductCard(product));
+    
+
+      
+
     CreateProductHeading(restInfo);
     logo.addEventListener("click", () => {
       swiper.classList.remove("hide");
@@ -298,6 +306,9 @@ function changeCount(event){
   }
 
 }
+
+
+
 function init() {
   new Swiper(".swiper", {
     sliderPerView: 1,
@@ -314,8 +325,15 @@ function init() {
   new WOW().init();
   checkAuth();
 
-  getData("./db/partners.json").then((data) => {
+  getData(
+    "https://delivery-food-f17c4-default-rtdb.europe-west1.firebasedatabase.app/partners.json"
+  ).then((data) => {
+    // console.log(data[0].products);
+    // for(let i = 0;i<data.length;i++){
+    //   CreateRestaurantCard(data[i]);
+    // }
     data.forEach(CreateRestaurantCard);
+
   });
 
   restSearch.addEventListener("keypress", function (event) {
@@ -329,7 +347,9 @@ function init() {
         }, 1000);
         return;
       }
-      getData("./db/partners.json")
+      getData(
+        "https://delivery-food-f17c4-default-rtdb.europe-west1.firebasedatabase.app/partners.json"
+      )
         .then(function (data) {
           return data.map(function (partner) {
             return partner.products;
@@ -337,10 +357,8 @@ function init() {
         })
         .then(function (linksProduct) {
           foodCards.textContent = "";
-
           linksProduct.forEach(function (link) {
-            getData(`./db/${link}`).then(function (data) {
-              const resultSearch = data.filter(function (item) {
+              const resultSearch = link.filter(function (item) {
                 const name = item.name.toLowerCase();
                 return name.includes(value.toLowerCase());
               });
@@ -355,7 +373,6 @@ function init() {
                 foodSection.classList.add("hide");
                 event.target.value = "";
               });
-            });
           });
         });
     }
@@ -378,6 +395,26 @@ function init() {
     toggleModalCart();
 
   });
+  orderBut.addEventListener("click", ()=>{
+    const products = JSON.parse(localStorage.getItem("cart"));
+    const user = localStorage.getItem("login");
+    const order = { user, products };
+    cart.length = 0;
+    localStorage.removeItem("cart");
+    toggleModalCart();
+   
+    try{
+      axios.post(
+        "https://delivery-food-f17c4-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+        JSON.stringify(order)
+      );
+      alert("Ваш заказ успешно принят");
+    }catch{
+      alert("Ошибка")
+    }
+    
+  });
+ 
   modalCart.addEventListener("click", changeCount);
   foodSection.addEventListener("click", addToCart);
 }
